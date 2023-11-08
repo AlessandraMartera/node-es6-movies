@@ -16,6 +16,8 @@ BONUS:
 Rendere le proprietà delle classi private e creare dei setter e dei getter per potervi accedere.
 Creare una classe Cart dove poter salvare i film che si intende noleggiare. Tramite delle funzioni, poter aggiungere o togliere dei film dal carrello. Creare poi una funzione che stampi il costo totale dei film da noleggiare, dove per ogni film occorre specificare un prezzo fisso di 3.99
 INIZIO ESERCIZIO*/
+
+// Array di oggetti iniziale
 let objList = [
     {
     title: "Ritorno al Futuro",
@@ -25,7 +27,7 @@ let objList = [
     type: "movie",
     },
     {
-    title: "Ritorno al Futuro",
+    title: "Ritorno al Futuro 2",
     year: "1985",
     genre: "Fantasy",
     rating: 5.5,
@@ -33,23 +35,24 @@ let objList = [
     seasons: "2"
     },
     {
-    title: "Ritorno al Futuro",
-    year: "1985",
-    genre: "horror",
+    title: "Bracking Bad",
+    year: "2012",
+    genre: "action",
     rating: 9.5,
     type: "tv",
-    seasons: "2"
+    seasons: "4"
     },
     {
-    title: "Ritorno al Futuro",
-    year: "1985",
-    genre: "Fantasy",
+    title: "La bella e la bestia",
+    year: "2018",
+    genre: "Drama",
     rating: 6.7,
     type: "movie",
     }
 
 ];
    
+// creazione della Classe Movie
 class Movie {
     title;
     year;
@@ -70,6 +73,7 @@ class Movie {
     }
 }
 
+// estensione dalla classe Movie di Serie Tv
 class Tv extends Movie {
     seasons;
 
@@ -85,7 +89,7 @@ class Tv extends Movie {
 }
 
 
-
+// Divisione in due array separati di film e serie tv
 const objMovieList = objList.map((element => {
     if(element.type === "movie"){
         return new Movie (element.title, element.year, element.genre, element.rating, element.type);
@@ -94,14 +98,16 @@ const objMovieList = objList.map((element => {
     }
 }))
 
-const objTVeList = objList.map((element => {
+const objTvList = objList.map((element => {
     if(element.type === "tv"){
         return new Tv (element.title, element.year, element.genre, element.rating, element.type, element.seasons);
     }
 }))
 
-console.log(objMovieList);
+console.log(`questa è la lista dei film ${objMovieList}`);
+console.log(`questa è la lista delle serieTv ${objTvList}`);
 
+// Funzione di Media Voti in base al genere
 function averageVote(value) {
 
     let sum = 0;
@@ -115,9 +121,7 @@ function averageVote(value) {
         }
 
     })
-return sum/sumElement;
-//    return console.log(sum/sumElement);
-    // return sum/sumElement;
+    return sum/sumElement;  
 }
 
 console.log(averageVote("Fantasy"));
