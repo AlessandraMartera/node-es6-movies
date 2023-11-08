@@ -48,6 +48,36 @@ let objList = [
     genre: "Drama",
     rating: 6.7,
     type: "movie",
+    },
+    {
+    title: "Avengers - infinuty war",
+    year: "2015",
+    genre: "Fantasy",
+    rating: 8.5,
+    type: "movie",
+    },
+    {
+    title: "Ritorno al Futuro - la serie",
+    year: "1985",
+    genre: "Fantasy",
+    rating: 5.5,
+    type: "tv",
+    seasons: "2"
+    },
+    {
+    title: "Loki",
+    year: "2021",
+    genre: "Fantasy",
+    rating: 9.5,
+    type: "tv",
+    seasons: "2"
+    },
+    {
+    title: "Cenerentola",
+    year: "2010",
+    genre: "Drama",
+    rating: 6.7,
+    type: "movie",
     }
 
 ];
@@ -90,7 +120,7 @@ class Tv extends Movie {
 
 
 // Divisione in due array separati di film e serie tv
-const objMovieList = objList.map((element => {
+const newObjList = objList.map((element => {
     if(element.type === "movie"){
         return new Movie (element.title, element.year, element.genre, element.rating, element.type);
     } else{
@@ -98,14 +128,16 @@ const objMovieList = objList.map((element => {
     }
 }))
 
-const objTvList = objList.map((element => {
-    if(element.type === "tv"){
-        return new Tv (element.title, element.year, element.genre, element.rating, element.type, element.seasons);
-    }
-}))
+// const objTvList = objList.map((element => {
+//     if(element.type === "tv"){
+//         return new Tv (element.title, element.year, element.genre, element.rating, element.type, element.seasons);
+//     }
+// }))
 
-console.log(`questa è la lista dei film ${objMovieList}`);
-console.log(`questa è la lista delle serieTv ${objTvList}`);
+console.log(`questa è la lista dei film:`);
+console.log(newObjList);
+// console.log(`questa è la lista delle serie tv:`);
+// console.log(`questa è la lista delle serieTv ${objTvList}`);
 
 // Funzione di Media Voti in base al genere
 function averageVote(value) {
@@ -114,6 +146,7 @@ function averageVote(value) {
     let sumElement = 0;
     // let choiceElement = value;
 
+    console.log(`la media dei voti del genere ${value} è:`);
     objList.forEach(element => { 
         if ( element.genre === value ){
             sum += element.rating;
@@ -125,3 +158,21 @@ function averageVote(value) {
 }
 
 console.log(averageVote("Fantasy"));
+
+// Creiamo una funzione che restituisca la lista di tutti i generi dei film, senza che questi si ripetano.
+function searchGenreFilm(value){
+    console.log(`i film che corrispondono al genere ${value} sono:`)
+    objList.forEach(el => {
+        if ( el.genre === value ){
+            if(el.type === "movie"){
+                console.log(el.title);
+            }
+            
+        }
+    })
+}
+
+
+console.log(`qui di seguito la lista dei film cercati`);
+searchGenreFilm("Fantasy");
+// Creo la ricerca dei film in base al genere, che non si ripetano
