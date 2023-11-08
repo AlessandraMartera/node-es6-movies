@@ -20,15 +20,23 @@ let objList = [
     {
     title: "Ritorno al Futuro",
     year: "1985",
-    genre: "Fantasy",
-    rating: "8.5",
+    genre: "action",
+    rating: 8.5,
     type: "movie",
     },
     {
     title: "Ritorno al Futuro",
     year: "1985",
     genre: "Fantasy",
-    rating: "8.5",
+    rating: 5.5,
+    type: "tv",
+    seasons: "2"
+    },
+    {
+    title: "Ritorno al Futuro",
+    year: "1985",
+    genre: "horror",
+    rating: 9.5,
     type: "tv",
     seasons: "2"
     },
@@ -36,15 +44,7 @@ let objList = [
     title: "Ritorno al Futuro",
     year: "1985",
     genre: "Fantasy",
-    rating: "8.5",
-    type: "tv",
-    seasons: "2"
-    },
-    {
-    title: "Ritorno al Futuro",
-    year: "1985",
-    genre: "Fantasy",
-    rating: "8.5",
+    rating: 6.7,
     type: "movie",
     }
 
@@ -75,7 +75,7 @@ class Tv extends Movie {
 
     constructor(title, year, genre, rating, type, seasons){
         // super
-        super(title, year, genre, rating, type,);
+        super(title, year, genre, rating, type);
         this.seasons=seasons;
     }
 
@@ -89,15 +89,35 @@ class Tv extends Movie {
 const objMovieList = objList.map((element => {
     if(element.type === "movie"){
         return new Movie (element.title, element.year, element.genre, element.rating, element.type);
+    } else{
+        return new Tv (element.title, element.year, element.genre, element.rating, element.type, element.seasons);
+    }
+}))
 
-        // this.objMovieList.push(movie);
-    // console.log(movie.toString());
+const objTVeList = objList.map((element => {
+    if(element.type === "tv"){
+        return new Tv (element.title, element.year, element.genre, element.rating, element.type, element.seasons);
     }
 }))
 
 console.log(objMovieList);
-// console.log(objList[0].toString());
 
-// objList.forEach(element => {
-//     console.log(element.toString());
-// });
+function averageVote(value) {
+
+    let sum = 0;
+    let sumElement = 0;
+    // let choiceElement = value;
+
+    objList.forEach(element => { 
+        if ( element.genre === value ){
+            sum += element.rating;
+            sumElement++;
+        }
+
+    })
+return sum/sumElement;
+//    return console.log(sum/sumElement);
+    // return sum/sumElement;
+}
+
+console.log(averageVote("Fantasy"));
