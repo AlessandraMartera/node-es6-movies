@@ -12,10 +12,13 @@ Creiamo una funzione che restituisca la media dei voti di tutti i film per un de
 Creiamo una funzione che restituisca la lista di tutti i generi dei film, senza che questi si ripetano.
 Creiamo una funzione che filtri i film in base ad un genere passato come argomento e ne ritorni un array con all’interno il risultato della funzione toString() di ogni film.
 Eseguire tutto il codice da terminale tramite NodeJs e stampiamo nel terminale il risultato delle varie funzioni.
+
 BONUS:
 Rendere le proprietà delle classi private e creare dei setter e dei getter per potervi accedere.
 Creare una classe Cart dove poter salvare i film che si intende noleggiare. Tramite delle funzioni, poter aggiungere o togliere dei film dal carrello. Creare poi una funzione che stampi il costo totale dei film da noleggiare, dove per ogni film occorre specificare un prezzo fisso di 3.99
-INIZIO ESERCIZIO*/
+*/
+
+// INIZIO ESERCIZIO ----------------------------------------------------------------------------
 
 // Array di oggetti iniziale
 let objList = [
@@ -88,9 +91,12 @@ class Movie {
     year;
     genre;
     rating;
+    // dato che il tipe nella classe movie sarà sempre movie quindi volendo potrei assegnarlo subito 
+    // type = "movie"
     type;
     
-    constructor(title, year, genre, rating, type){
+    // passo a type già un valore, cosi se type non doeveese essere specificato li assegno un volere di defoult "movie"
+    constructor(title, year, genre, rating, type = "movie"){
         this.title = title;
         this.year = year;
         this.genre = genre;
@@ -105,10 +111,12 @@ class Movie {
 
 // estensione dalla classe Movie di Serie Tv
 class Tv extends Movie {
+    // anche qui potrei fare 
+    // type = "tv";
     seasons;
 
     constructor(title, year, genre, rating, type, seasons){
-        // super
+        // super serve per richiamare il costruttore della classe padre 
         super(title, year, genre, rating, type);
         this.seasons=seasons;
     }
@@ -120,7 +128,9 @@ class Tv extends Movie {
 
 
 // Divisione in due array separati di film e serie tv
-const newObjList = objList.map((element => {
+// map crea un array con lo stesso numero degli elementi del primo
+// map deve per forza ritornare un qualcosa, altrimenti da undfind
+const MoviesList = objList.map((element => {
     if(element.type === "movie"){
         return new Movie (element.title, element.year, element.genre, element.rating, element.type);
     } else{
@@ -128,16 +138,8 @@ const newObjList = objList.map((element => {
     }
 }))
 
-// const objTvList = objList.map((element => {
-//     if(element.type === "tv"){
-//         return new Tv (element.title, element.year, element.genre, element.rating, element.type, element.seasons);
-//     }
-// }))
-
-console.log(`questa è la lista dei film:`);
-console.log(newObjList);
-// console.log(`questa è la lista delle serie tv:`);
-// console.log(`questa è la lista delle serieTv ${objTvList}`);
+console.log(`questa è la lista dei film e serie tv:`);
+console.log(MoviesList);
 
 // Funzione di Media Voti in base al genere
 function averageVote(value) {
@@ -152,14 +154,12 @@ function averageVote(value) {
             sum += element.rating;
             sumElement++;
         }
-
     })
     return sum/sumElement;  
 }
-
 console.log(averageVote("Fantasy"));
 
-// Creiamo una funzione che restituisca la lista di tutti i generi dei film, senza che questi si ripetano.
+// Creiamo una funzione che restituisca la lista di tutti i film in base al genre, senza che questi si ripetano.
 function searchGenreFilm(value){
     console.log(`i film che corrispondono al genere ${value} sono:`)
     objList.forEach(el => {
@@ -172,6 +172,18 @@ function searchGenreFilm(value){
     })
 }
 
+function allGenreFilm(){
+    console.log(`i generi presenti nella lista sono:`)
+    allGenre = [];
+    objList.forEach(el => {
+        if ( !allGenre.includes(el.genre) ){
+            allGenre.push(el.genre)
+        }
+    })
+    console.log(allGenre)
+}
+
+allGenreFilm();
 
 console.log(`qui di seguito la lista dei film cercati`);
 searchGenreFilm("Fantasy");
